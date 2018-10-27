@@ -1,6 +1,3 @@
-#include "stdafx.h"
-#include <assert.h>
-#include <ctype.h>
 #include "Common.h"
 
 ExerciseFunction selectExercise(const Exercise exercises[], const int size, const int selectedValue) {
@@ -36,6 +33,18 @@ int wanntToQuit() {
         else
             printf("(%c) Is not a valid command. please try again:", command);
     }
+}
+
+void runExercises(const Exercise exercises[], int numberOfExercises) {
+    do {
+        ExerciseFunction selectedExercise = selectExercise(exercises, numberOfExercises, inputExercise());
+        if (selectedExercise != NULL) {
+            selectedExercise();
+        }
+        else {
+            printf("The given exercise was not found");
+        }
+    } while (wanntToQuit());
 }
 
 void clrscr()
