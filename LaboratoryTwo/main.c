@@ -97,8 +97,55 @@ int exercise3() {
     return 0;
 }
 
+int exercise4() {
+    int dice1 = 1, dice2 = 1, dice3 = 1;
+    int money = 50;
+    while (1)
+    {
+        printf("Do you wannt to play? (y/n)? ");
+        char playOrNotToPlay = ' ';
+        while ((playOrNotToPlay = getchar()) != '\n' && playOrNotToPlay != EOF) {}
+        playOrNotToPlay = getchar();
+        if (playOrNotToPlay == 'n')
+            break;
+        else if (playOrNotToPlay != 'y')
+            continue;
+
+        money -= 10;
+        dice1 = (rand() % 6) + 1;
+        dice2 = (rand() % 6) + 1;
+        dice2 = (rand() % 6) + 1;
+
+        if (dice1 == dice2 && dice2 == dice3) {
+            if (dice1 == 6) {
+                printf("You won BIG! +100kr\n");
+                money += 100;
+            }
+            else {
+                printf("You won! +50kr\n");
+                money += 50;
+            }
+        }
+        else if (dice1 == dice2 || dice2 == dice3 || dice1 == dice3) {
+            printf("You got your moneys worth +10kr\n");
+            money += 10;
+        }
+        else {
+            printf("You lost! +0kr\n");
+        }
+        printf("Money:%d\ndices: %d, %d, %d\n", money, dice1, dice2, dice3);
+
+        if (money < 10) {
+            printf("You got thrown out becuse you had no money!\n");
+            break;
+        }
+    }
+
+    return 0;
+}
+
 int main(int argc, char *argv[]) {
     srand((int)time(NULL)); // Set seed to least significant byte
-    Exercise a[] = { {exercise1,1},{exercise2,2}, {exercise3,3} };
+    Exercise a[] = { {exercise1, 1},{exercise2, 2}, {exercise3, 3}, {exercise4, 4} };
     runExercises(a, 3);
 }
